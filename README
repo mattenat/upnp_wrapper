@@ -12,7 +12,8 @@ between applications.
 
 To install:
 
-	script/generate upnp_wrapper
+	script/plugin install git://github.com/mattenat/upnp_wrapper.git
+	script/generate upnp_wrapper [for upnp.yml file to customize]
 
 which will setup a:
 
