@@ -1,0 +1,5 @@
+development:
+  router_port: 80
+  local_port: 3000
+  protocol: tcp
+  description: Rails Dev Testing

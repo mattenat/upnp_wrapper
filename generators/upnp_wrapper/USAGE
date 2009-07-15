@@ -1,0 +1,9 @@
+Description:
+    This creates a upnp.yml file in your config directory for customizing.
+    Without this file, upnp_wrapper will use sensible defaults.
+
+Example:
+    ./script/generate upnp_wrapper
+
+    This will create:
+        config/upnp.yml

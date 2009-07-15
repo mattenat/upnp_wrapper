@@ -1,0 +1,39 @@
+UpnpWrapper
+===============
+
+This plugin is a means of using UPnP to forward a port on your router
+to your development server.  I wrote it for testing Facebook
+applications in conjunction with a dynamic DNS provider so I could be
+confident my router would allow callbacks to my development
+application only when I was trying to test the right piece of
+software.  As a contractor with many clients, I didn't want the
+security risk of forgetting to turn off the forwarding when switching
+between applications.
+
+To install:
+
+	script/generate upnp_wrapper
+
+which will setup a:
+
+	RAILS_ROOT/config/upnp.yml
+
+file with sensible defaults.  Feel free to customize for your own needs.
+
+Please think many times over about running this code in any mode besides
+development.
+
+This code depends on Dario Meloni's mupnp gem for all the heavy
+lifting.  Thanks!  As such, you will need to have that gem mupnp
+installed for proper functionality.
+
+Finally, this will only work if you have a router that is configured
+to use UPnP (http://www.upnp.org/standardizeddcps/) and isn't already
+configured to forward the port otherwise.  You'll also need to ensure
+your local machine's firewall isn't blocking access to the port.
+
+NOTE: I wouldn't guarantee that the shutdown code will be called when
+Ruby exits if the exit is in a non-graceful manner.  For my purposes,
+this is good enough.
+
+Copyright (c) 2009 Matt Ittigson, released under the MIT license
