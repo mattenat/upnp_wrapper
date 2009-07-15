@@ -37,4 +37,8 @@ NOTE: I wouldn't guarantee that the shutdown code will be called when
 Ruby exits if the exit is in a non-graceful manner.  For my purposes,
 this is good enough.
 
+For more information
+===============
+http://futureadapter.com/2009/07/15/using-upnp-for-facebook-dev/
+
 Copyright (c) 2009 Matt Ittigson, released under the MIT license
