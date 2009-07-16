@@ -1,5 +1,6 @@
 development:
-  router_port: 80
+  router_port: 3000
   local_port: 3000
   protocol: tcp
-  description: Rails Dev Testing
+  description: Rails UpnpWrapper
+  active: true

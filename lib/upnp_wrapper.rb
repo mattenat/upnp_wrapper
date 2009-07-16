@@ -5,8 +5,9 @@ rescue Exception => e
   raise e, "Must have mupnp gem installed"
 end
 
-require 'upnp_wrapper/commands'
+require 'upnp_wrapper/upnp_wrapper'
 
-UpnpWrapper::Commands.startup
+wrapper = UpnpWrapper::UpnpWrapper.new
+wrapper.startup
 
-at_exit { UpnpWrapper::Commands.shutdown }
+at_exit { wrapper.shutdown }
