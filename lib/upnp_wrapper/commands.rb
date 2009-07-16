@@ -10,7 +10,7 @@ module UpnpWrapper
         client.addPortMapping(config[:router_port],
                               config[:local_port],
                               config[:protocol],
-                              config[:description]) unless config.nil?
+                              config[:description])
       rescue Exception => e
         raise UpnpWrapper::Error, e.to_s
       end
@@ -20,7 +20,7 @@ module UpnpWrapper
       logger.debug "Destroy mapping for router port #{config[:router_port]}"
 
       client.deletePortMapping(config[:router_port],
-                               config[:protocol]) unless config.nil?
+                               config[:protocol])
     end
 
   protected
