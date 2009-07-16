@@ -46,12 +46,8 @@ module UpnpWrapper
     end
 
     def valid_environment?
-      begin
-        # don't open a port in script/console mode
-        @valid = active? && !Kernel.const_get(:IRB)
-      rescue NameError
-        @valid = active?
-      end
+      # don't open a port in script/console mode
+      @valid ||= active? && !Object.const_defined?(:IRB)
     end
 
   protected
