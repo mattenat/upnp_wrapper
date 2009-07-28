@@ -3,11 +3,7 @@ module UpnpWrapper
 
   class UpnpWrapper
     CONFIG_FILE = File.join(RAILS_ROOT, "config", "upnp.yml")
-    DEFAULT_PROTOCOL = UPnP::Protocol::TCP
-
-    include ActiveSupport::Memoizable
-
-    memoize :valid_environment?
+    DEFAULT_PROTOCOL = "TCP"
 
     attr_reader :router_port, :local_port, :protocol, :description, :logger
 
@@ -33,7 +29,7 @@ module UpnpWrapper
     end
 
     def startup
-      if valid_environment? && !started?
+      unless started?
         begin
           logger.debug "Mapping router port #{router_port} to #{local_port}"
 
@@ -49,19 +45,8 @@ module UpnpWrapper
       client.deletePortMapping(router_port, protocol) if started?
     end
 
-    def valid_environment?
-      if active? && !Object.const_defined?(:IRB)
-        begin
-          require 'UPnP'
-          UPnP::UPnP
-          true
-        rescue Exception => e
-          logger.fatal "Must have mupnp gem installed"
-          false
-        end
-      else
-        false
-      end
+    def self.valid_environment?
+      !Object.const_defined?(:IRB) && Gem.available?('mupnp')        
     end
 
   protected
