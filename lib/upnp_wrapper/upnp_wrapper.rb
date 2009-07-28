@@ -5,6 +5,10 @@ module UpnpWrapper
     CONFIG_FILE = File.join(RAILS_ROOT, "config", "upnp.yml")
     DEFAULT_PROTOCOL = UPnP::Protocol::TCP
 
+    include ActiveSupport::Memoizable
+
+    memoize :valid_environment?
+
     attr_reader :router_port, :local_port, :protocol, :description, :logger
 
     def initialize(config_file = CONFIG_FILE, logger = RAILS_DEFAULT_LOGGER)
@@ -46,8 +50,18 @@ module UpnpWrapper
     end
 
     def valid_environment?
-      # don't open a port in script/console mode
-      @valid ||= active? && !Object.const_defined?(:IRB)
+      if active? && !Object.const_defined?(:IRB)
+        begin
+          require 'UPnP'
+          UPnP::UPnP
+          true
+        rescue Exception => e
+          logger.fatal "Must have mupnp gem installed"
+          false
+        end
+      else
+        false
+      end
     end
 
   protected
